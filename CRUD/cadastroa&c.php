@@ -1,0 +1,66 @@
+<?php
+	include 'parabens.php';
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>A&C Cadastro</title>
+	<link rel="stylesheet" type="text/css" href="css/easyui.css">
+	<link rel="stylesheet" type="text/css" href="css/icon.css">
+	<link rel="stylesheet" type="text/css" href="css/demo.css">
+	<script type="text/javascript" src="js/jquery-1.6.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="js/jquery.edatagrid.js"></script>
+	<script type="text/javascript" src="js/datagrid-filter.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("div.easyui-layout").layout();
+			$('#dg').edatagrid({
+				url: 'pegar_clientes.php',
+				saveUrl: 'salvar_clientes.php',
+				updateUrl: 'alterar_clientes.php',
+				destroyUrl: 'remover_clientes.php',
+				fitColumns: true
+			});
+			var dg = $('#dg');
+			dg.edatagrid();    // create datagrid
+			dg.edatagrid('enableFilter');    // enable filter
+		});
+	</script>
+</head>
+<body>
+	<div class="easyui-layout">
+	<h2>A&C Cadastro de Clientes</h2>
+	<div class="demo-info" style="margin-bottom:10px">
+		<div class="demo-tip icon-tip">&nbsp;</div>
+		<div>Clique 2x na linha para editação  do cliente!</div>
+	</div>
+	<table id="dg" title="Cadastro de clientes" style="width:1240px;height:450px; border:1px solid #ccc;"
+			toolbar="#toolbar" pagination="true" idField="id"
+			rownumbers="true" fitColumns="true" resizable="true">
+		<thead>
+			<tr>
+				<th field="nome" width="15" editor="{type:'validatebox',options:{required:true}}">Nome</th>
+				<th field="cpf" width="10" editor="{type:'validatebox',options:{required:true}}">CPF</th>
+				<th field="processo" width="12" editor="{type:'validatebox',options:{required:true}}">Nº Processo</th>
+				<th field="telefone" width="12" editor="{type:'validatebox',options:{required:true}}">Telefone</th>
+				<th field="email" width="15" editor="{type:'validatebox',options:{validType:'email'}}">Email</th>
+				<th field="status" with="20" editor="{type:'validatebox',options:{required:true}}">Status</th>
+				<th field="observacoes" width="20" editor="{type:'validatebox',options:{required:true}}">Observações</th>
+				<th field="dataaniversario" width="10" editor="{type:'validatebox',options:{required:true}}">Data de Nascimento</th>
+				<th field="data" widht="15">Data de Alteração</th> 
+			</tr>
+		</thead>
+	</table>
+	<div id="toolbar">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="javascript:$('#dg').edatagrid('addRow')">Novo</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="javascript:$('#dg').edatagrid('destroyRow')">Remover</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-save" plain="true" onclick="javascript:$('#dg').edatagrid('saveRow')">Salvar</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-undo" plain="true" onclick="javascript:$('#dg').edatagrid('cancelRow')">Cancelar</a>
+	</div>
+	</div>
+	<form action="parabens.php" method="post">
+	</form>	
+</body>
+</html>
+?>
